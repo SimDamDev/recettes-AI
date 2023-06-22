@@ -9,10 +9,8 @@ const recipeSchema = new mongoose.Schema({
   price: String, 
   serves: Number,
   ingredients: [{
-    name: String,
-    quantity: Number,
-    unit: String,
-    image: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Ingredient'
   }],
   preparationInstructions: [
     {

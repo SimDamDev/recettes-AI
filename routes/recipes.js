@@ -5,7 +5,7 @@ const Recipe = require('../models/Recipe');
 // Get all recipes
 router.get('/', async (req, res) => {
   try {
-    const recipes = await Recipe.find();
+    const recipes = await Recipe.find().populate('ingredients');
     res.json(recipes);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -90,7 +90,7 @@ router.delete('/:id', getRecipe, async (req, res) => {
 async function getRecipe(req, res, next) {
   let recipe;
   try {
-    recipe = await Recipe.findById(req.params.id);
+    recipe = await Recipe.findById(req.params.id).populate('ingredients');
     if (recipe == null) {
       return res.status(404).json({ message: 'Cannot find recipe' });
     }

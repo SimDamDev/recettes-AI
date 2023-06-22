@@ -1,5 +1,5 @@
 // Replace this URL with the URL of your own API.
-const recipeApiUrl = 'http://localhost:3000/api/recipes/649094ea38d2a0aac0f8ad6d';
+const recipeApiUrl = 'http://localhost:3000/api/recipes/6492d88dd9de2dae6fc077b6';
 fetch(recipeApiUrl)
   .then(response => response.json())
   .then(recipe => {
@@ -46,46 +46,46 @@ fetch(recipeApiUrl)
       ingredientsList.removeChild(ingredientsList.firstChild);
     }
 
-    // Add the ingredients to the list
-    recipe.ingredients.forEach(ingredient => {
-      const ingredientElement = document.createElement('div');
-      ingredientElement.classList.add('ingredient-card');
+// Add the ingredients to the list
+recipe.ingredients.forEach(ingredient => {
+  const ingredientElement = document.createElement('div');
+  ingredientElement.classList.add('ingredient-card');
 
-      const imageContainer = document.createElement('div');
-      imageContainer.classList.add('image-container');
+  const imageContainer = document.createElement('div');
+  imageContainer.classList.add('image-container');
 
-      const ingredientImage = document.createElement('img');
-      ingredientImage.src = ingredient.image;
-      ingredientImage.onerror = function() {
-        this.onerror = null;
-        this.src = '/ingredient_default.jpeg';
-      };
-      imageContainer.appendChild(ingredientImage);
-      ingredientElement.appendChild(imageContainer);
+  const ingredientImage = document.createElement('img');
+  ingredientImage.src = ingredient.image;
+  ingredientImage.onerror = function() {
+    this.onerror = null;
+    this.src = '/ingredient_default.jpeg';
+  };
+  imageContainer.appendChild(ingredientImage);
+  ingredientElement.appendChild(imageContainer);
 
-      const ingredientText = document.createElement('div');
-      ingredientText.classList.add('ingredient-text');
+  const ingredientText = document.createElement('div');
+  ingredientText.classList.add('ingredient-text');
 
-      const quantityText = document.createElement('p');
-      quantityText.classList.add('quantity-text');
+  const quantityText = document.createElement('p');
+  quantityText.classList.add('quantity-text');
 
-      if (ingredient.unit === 'piece') {
-        quantityText.textContent = `${ingredient.quantity}`;
-      } else {
-        quantityText.textContent = `${ingredient.quantity} ${ingredient.unit}`;
-      }
+  if (ingredient.unit === 'piece') {
+    quantityText.textContent = `${ingredient.quantity}`;
+  } else {
+    quantityText.textContent = `${ingredient.quantity} ${ingredient.unit}`;
+  }
 
-      ingredientText.appendChild(quantityText);
+  ingredientText.appendChild(quantityText);
 
-      if (ingredient.unit !== 'piece') {
-        ingredientText.appendChild(document.createTextNode(' de'));
-      }
+  if (ingredient.unit !== 'piece') {
+    ingredientText.appendChild(document.createTextNode(' de'));
+  }
 
-      ingredientText.appendChild(document.createTextNode(' ' + ingredient.name));
-      ingredientElement.appendChild(ingredientText);
+  ingredientText.appendChild(document.createTextNode(' ' + ingredient.name));
+  ingredientElement.appendChild(ingredientText);
 
-      ingredientsList.appendChild(ingredientElement);
-    });
+  ingredientsList.appendChild(ingredientElement);
+});
 
     // Update the instructions containers
     preparationInstructionsContainer.classList.add('instructions-card');

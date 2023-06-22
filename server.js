@@ -7,7 +7,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:`);
+  console.log(`Server is running at http://localhost:${port}`);
 });
 
 const mongoose = require('mongoose');
@@ -21,7 +21,9 @@ mongoose.connect('mongodb://localhost:27017/recipeApp', { useNewUrlParser: true,
   });
 
 const recipeRoutes = require('./routes/recipes');
+const ingredientRoutes = require('./routes/ingredients'); // Ajoutez cette ligne
 
 app.use(express.json());
 app.use('/api/recipes', recipeRoutes);
+app.use('/api/ingredients', ingredientRoutes); // Ajoutez cette ligne
 app.use(express.static('public'));
