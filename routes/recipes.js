@@ -1,8 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const Recipe = require('../models/Recipe');
 
-// Get all recipes
+import express from 'express';
+import { MongoClient } from 'mongodb';
+import Recipe from '../models/Recipe.js';
+ const router = express.Router();
+ // Get all recipes
 router.get('/', async (req, res) => {
   try {
     const recipes = await Recipe.find().populate('ingredients');
@@ -11,13 +12,11 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-
-// Get one recipe
+ // Get one recipe
 router.get('/:id', getRecipe, (req, res) => {
   res.json(res.recipe);
 });
-
-// Create one recipe
+ // Create one recipe
 router.post('/', async (req, res) => {
   const recipe = new Recipe({
     title: req.body.title,
@@ -32,16 +31,14 @@ router.post('/', async (req, res) => {
     cookingInstructions: req.body.cookingInstructions,
     servingInstructions: req.body.servingInstructions,
   });
-
-  try {
+   try {
     const newRecipe = await recipe.save();
     res.status(201).json(newRecipe);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 });
-
-// Update one recipe
+ // Update one recipe
 router.patch('/:id', getRecipe, async (req, res) => {
   if (req.body.title != null) {
     res.recipe.title = req.body.title;
@@ -67,16 +64,14 @@ router.patch('/:id', getRecipe, async (req, res) => {
   if (req.body.servingInstructions != null) {
     res.recipe.servingInstructions = req.body.servingInstructions;
   }
-
-  try {
+   try {
     const updatedRecipe = await res.recipe.save();
     res.json(updatedRecipe);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 });
-
-// Delete one recipe
+ // Delete one recipe
 router.delete('/:id', getRecipe, async (req, res) => {
   try {
     await res.recipe.remove();
@@ -85,8 +80,7 @@ router.delete('/:id', getRecipe, async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-
-// Middleware function for get by ID
+ // Middleware function for get by ID
 async function getRecipe(req, res, next) {
   let recipe;
   try {
@@ -97,9 +91,7 @@ async function getRecipe(req, res, next) {
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
-
-  res.recipe = recipe;
+   res.recipe = recipe;
   next();
 }
-
-module.exports = router;
+ export default router;

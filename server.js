@@ -1,4 +1,6 @@
 const express = require('express');
+const { ChatGPTAPI } = require('chatgpt');
+const { initChatGPT, askQuestion } = require('./your-module-name.js');
 const app = express();
 const port = 3000;
 
@@ -27,3 +29,14 @@ app.use(express.json());
 app.use('/api/recipes', recipeRoutes);
 app.use('/api/ingredients', ingredientRoutes); // Ajoutez cette ligne
 app.use(express.static('public'));
+
+// Call the initChatGPT function to initialize the chatbot API
+initChatGPT();
+
+// Use the askQuestion function to send a message to the chatbot API and get a response
+app.get('/api/gpt', async (req, res) => {
+  const question = req.query.question;
+  askQuestion(question, (response) => {
+    res.send(response);
+  });
+});

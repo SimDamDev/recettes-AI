@@ -13,7 +13,7 @@ body {
     align-items: center;
 }
 
-h1, h2 {
+h1, h2, .subheading {
     color: var(--orange-color);
     text-align: center;
 }
@@ -35,7 +35,7 @@ label {
 }
 
 input[type="text"], input[type="number"] {
-    width: 450px;
+    width: 70%;
     padding: 10px;
     margin-top: 5px;
     border: 1px solid #ccc;
@@ -54,13 +54,6 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #ff7f33;
-}
-
-.options {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    align-items: center;
-    gap: 10px;
 }
 
 input.toggle-round {
@@ -97,6 +90,23 @@ input.toggle-round:checked + label {
 
 input.toggle-round:checked + label:after {
     margin-left: 20px;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 10px;
+}
+
+.option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.option label {
+    font-size: 0.9em;
 }
 
 input:disabled {

@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
+import Ingredient from '../models/Ingredient.js';
+
 const router = express.Router();
-const Ingredient = require('../models/Ingredient');
 
 // ...
 
@@ -21,4 +22,4 @@ router.post('/', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

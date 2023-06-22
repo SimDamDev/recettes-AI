@@ -47,3 +47,24 @@ pluralNameField.disabled = true;
 switchInput.addEventListener('change', function() {
     pluralNameField.disabled = !this.checked;
   });
+
+const autoFillSwitch = document.getElementById('autoFill');
+const pluralSwitch = document.getElementById('pluralSwitch');
+const unitsField = document.getElementById('units');
+
+  // Add an event listener to the autoFill switch
+  autoFillSwitch.addEventListener('change', function() {
+    // If the autoFill switch is checked, disable the pluralName field and the units field
+    if (this.checked) {
+      pluralNameField.disabled = true;
+      pluralSwitch.disabled = true;
+      unitsField.disabled = true;
+    } else {
+      // If the autoFill switch is not checked, enable the pluralName field and the units field
+      pluralNameField.disabled = false;
+      pluralSwitch.disabled = false;
+      unitsField.disabled = false;
+    }
+  });
+
+  //TODO quantité a gerer das recette et pas ici!
