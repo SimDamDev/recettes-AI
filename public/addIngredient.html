@@ -19,14 +19,13 @@
         <label for="image">Image URL:</label>
         <input type="text" id="image" name="image">
 
-        <button type="button" id="generateButton">Générer</button>
-        <input type="submit" value="Ajouter">
+        <button type="submit" id="submitButton">Ajouter</button>
 
         <h2>Options</h2>
         <div class="options">
             <div class="option">
                 <label for="autoFill">Remplissage automatique</label>
-                <input type="checkbox" id="autoFill" name="autoFill" class="toggle-round">
+                <input type="checkbox" id="autoFill" name="autoFill" class="toggle-round" onchange="changeButtonLabel(this.checked)">
                 <label for="autoFill"></label>        
             </div>
             <div class="option">

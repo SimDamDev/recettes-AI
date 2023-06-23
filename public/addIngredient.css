@@ -42,7 +42,7 @@ input[type="text"], input[type="number"] {
     border-radius: 10px;
 }
 
-input[type="submit"] {
+#submitButton {
     margin-top: 20px;
     padding: 10px 20px;
     background-color: var(--orange-color);
@@ -52,10 +52,9 @@ input[type="submit"] {
     cursor: pointer;
 }
 
-input[type="submit"]:hover {
+#submitButton:hover {
     background-color: #ff7f33;
 }
-
 input.toggle-round {
     display:none;
 }
