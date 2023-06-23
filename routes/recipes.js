@@ -1,8 +1,10 @@
+const express = require('express');
+const Recipe = require('../models/Recipe');
 
-import express from 'express';
-import { MongoClient } from 'mongodb';
-import Recipe from '../models/Recipe.js';
- const router = express.Router();
+
+const router = express.Router();
+
+
  // Get all recipes
 router.get('/', async (req, res) => {
   try {
@@ -94,4 +96,5 @@ async function getRecipe(req, res, next) {
    res.recipe = recipe;
   next();
 }
- export default router;
+
+module.exports = router;

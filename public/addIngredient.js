@@ -67,4 +67,20 @@ const unitsField = document.getElementById('units');
     }
   });
 
+  document.getElementById('generateButton').addEventListener('click', async function() {
+    console.log("GPT-3 Request:", document.getElementById('name').value); // affichez le nom de l'ingrédient dans la console
+    const name = document.getElementById('name').value;
+
+    const response = await fetch('/api/gpt', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name }) // envoyez juste le nom de l'ingrédient
+    });
+
+    const data = await response.json();
+    console.log("GPT-3 Response:", data); // affichez la réponse de GPT-3 dans la console
+});
+
   //TODO quantité a gerer das recette et pas ici!

@@ -1,5 +1,5 @@
-import express from 'express';
-import Ingredient from '../models/Ingredient.js';
+const express = require('express');
+const Ingredient = require('../models/Ingredient');
 
 const router = express.Router();
 
@@ -22,4 +22,4 @@ router.post('/', async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
+
 
 const ingredientSchema = new mongoose.Schema({
   name: {
@@ -20,6 +21,7 @@ const ingredientSchema = new mongoose.Schema({
 
 const Ingredient = mongoose.model('Ingredient', ingredientSchema);
 
-export default Ingredient;
+module.exports = Ingredient;
+
 
 //TODO quantité a gerer das recette et pas ici!

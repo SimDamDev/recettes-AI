@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const recipeSchema = new mongoose.Schema({
   title: String,
@@ -40,6 +40,7 @@ const recipeSchema = new mongoose.Schema({
 
 const Recipe = mongoose.model('Recipe', recipeSchema);
 
-export default Recipe;
+module.exports = Recipe;
+
 
 //TODO modifier le champs ingredient en sorte de memoriser la quantité et l'unité de mesure choisi, ainsi que le id de l'ingredient
