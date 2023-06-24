@@ -19,6 +19,9 @@ router.post('/check', async (req, res) => {
     const name = req.body.name; // obtenez le nom de l'ingrédient de la requête du client
     const checkPrompt = `Est-ce que ${name} peut avoir sa place dans la liste d'ingredient d'une recette ?`; // créez le prompt de vérification
     const completion = await createChatCompletion(checkPrompt);
+    if (completion.response.trim().startsWith("en tant qu") ){
+    const completion = await createChatCompletion(checkPrompt);
+    }
     res.json(completion);
   } catch (error) {
     res.status(500).json({error: error.toString()});
