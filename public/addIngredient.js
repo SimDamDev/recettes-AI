@@ -158,6 +158,7 @@ async function checkIngredient(nameFieldValue) {
     // Affichez une erreur sur la page
     const errorDiv = document.getElementById('nameError');
     errorDiv.textContent = "GPT ne considère pas cela comme un ingrédient.";
+    loadingMessageElement.textContent = "";
     return false;
   }
   
