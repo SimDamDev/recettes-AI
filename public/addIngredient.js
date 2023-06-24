@@ -92,6 +92,7 @@ form.addEventListener('submit', event => {
   }
 });
 
+const nameField = document.getElementById('name');
 
 // Add an event listener for the input event
 nameField.addEventListener('input', function() {
