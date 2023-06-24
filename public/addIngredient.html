@@ -10,6 +10,7 @@
         <label for="name">Nom:</label>
         <input type="text" id="name" name="name" required>
         <span id="nameError" style="color: red;"></span>
+        <span id="loadingMessage" class="loading"></span>
 
         <label for="pluralName" id="pluralNameLabel">Nom au pluriel:</label>
         <input type="text" id="pluralName" name="pluralName">
@@ -21,7 +22,14 @@
         <input type="text" id="image" name="image">
 
         <button type="submit" id="submitButton">Ajouter</button>
-        <span id="loadingMessage" class="loading"></span>
+
+        <div id="ingredientPreview" style="display: none;">
+            <h2>Prévisualisation de l'ingrédient</h2>
+            <p>Nom : <span id="previewName"></span></p>
+            <p>Nom au pluriel : <span id="previewPluralName"></span></p>
+            <p>Unités : <span id="previewUnits"></span></p>
+          </div>
+
 
         <h2>Options</h2>
         <div class="options">

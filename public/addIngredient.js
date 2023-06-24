@@ -21,6 +21,7 @@ switchInput.addEventListener('change', function() {
 const autoFillSwitch = document.getElementById('autoFill');
 const pluralSwitch = document.getElementById('pluralSwitch');
 const unitsField = document.getElementById('units');
+const loadingMessageElement = document.getElementById('loadingMessage');
 
 // Add an event listener to the autoFill switch
 autoFillSwitch.addEventListener('change', function() {
@@ -39,12 +40,12 @@ autoFillSwitch.addEventListener('change', function() {
   // Update the button label whenever the switch is toggled
   changeButtonLabel(this.checked);
 });
-const loadingMessageElement = document.getElementById('loadingMessage');
+
 async function handleAutoFill(name) {
   console.log('GPT-3 Request:', name); // log the ingredient name to the console
 
   // Display the loading message
-  loadingMessageElement.textContent = 'Loading...';
+  loadingMessageElement.textContent = 'Generation en cours....';
 
   try {
     const response = await fetch('/api/gpt', {
@@ -70,6 +71,12 @@ async function handleAutoFill(name) {
     document.getElementById('units').dispatchEvent(new Event('input'));
 
     console.log('Success:', data, content.pluralName, content.units);
+
+    document.getElementById('previewName').textContent = name;
+  document.getElementById('previewPluralName').textContent = content.pluralName || 'N/A';
+  document.getElementById('previewUnits').textContent = content.units || 'N/A';
+
+  document.getElementById('ingredientPreview').style.display = 'block';
 
     loadingMessageElement.textContent = '';
   } catch (error) {
@@ -134,6 +141,9 @@ function changeButtonLabel(isAutoFill) {
 }
 
 async function checkIngredient(nameFieldValue) {
+
+  loadingMessageElement.textContent = 'Verification en cours...';
+
   const checkResponse = await fetch('/api/gpt/check', {
     method: 'POST',
     headers: {
