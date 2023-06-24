@@ -17,7 +17,9 @@ const ingredientSchema = new mongoose.Schema({
   },
 });
 
-Crée un objet ingrédient avec le nom 'Tomate' en utilisant ce schéma.`;
+Crée un objet ingrédient avec le nom 'Tomate' en utilisant ce schéma.
+
+La reponse doit contenir au moins une valeur pour chaque champs, et doit être un objet JSON valide.`;
 
 module.exports = {
   ingredientPrompt
