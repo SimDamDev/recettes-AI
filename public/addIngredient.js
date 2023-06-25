@@ -1,4 +1,3 @@
-'use strict';
 
 // Select the form
 const form = document.querySelector('form');
@@ -157,7 +156,8 @@ async function checkIngredient(nameFieldValue) {
   if (!checkData.content.trim().startsWith("Oui")) { // Suppose que la réponse de GPT-3 commence par "Oui" si c'est un ingrédient
     // Affichez une erreur sur la page
     const errorDiv = document.getElementById('nameError');
-    errorDiv.textContent = "GPT ne considère pas cela comme un ingrédient.";
+    errorDiv.innerHTML = "GPT ne considère pas cela comme un ingrédient.<br> Essayez un autre nom ou de le créer manuellement.";
+    errorDiv.style.display = "block"; // Ajoutez cette ligne pour définir le style "display" sur "block"
     loadingMessageElement.textContent = "";
     return false;
   }
@@ -182,3 +182,9 @@ form.addEventListener('submit', async function(event) {
 
 // Initialize the button label
 changeButtonLabel(autoFillSwitch.checked);
+
+// Set the autoFillSwitch to checked by default
+autoFillSwitch.checked = true;
+
+// Call the event listener function for the autoFillSwitch
+autoFillSwitch.dispatchEvent(new Event('change'));
