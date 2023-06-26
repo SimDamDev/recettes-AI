@@ -62,13 +62,10 @@ async function handleAutoFill(name) {
     const contentStart = data.content.indexOf('{');
     const contentEnd = data.content.lastIndexOf('}') + 1;
     const content = JSON.parse(data.content.substring(contentStart, contentEnd));
-
-    // Use the extracted data to fill in the form fields
     document.getElementById('pluralName').value = content.pluralName || '';
     document.getElementById('pluralName').dispatchEvent(new Event('input'));
     document.getElementById('units').value = content.units || '';
     document.getElementById('units').dispatchEvent(new Event('input'));
-
     console.log('Success:', data, content.pluralName, content.units);
 
     document.getElementById('previewName').textContent = name;
@@ -183,8 +180,6 @@ form.addEventListener('submit', async function(event) {
 // Initialize the button label
 changeButtonLabel(autoFillSwitch.checked);
 
-// Set the autoFillSwitch to checked by default
 autoFillSwitch.checked = true;
 
-// Call the event listener function for the autoFillSwitch
 autoFillSwitch.dispatchEvent(new Event('change'));
