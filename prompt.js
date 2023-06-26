@@ -34,7 +34,11 @@ tu est un expert en cuisine
 est ce que la Tomate est un ingrédient ?
 `;
 
+const generateImage = `
+genere une image photorealiste sur fond blanc de l'ingredient Tomate `
+
 module.exports = {
   ingredientPrompt,
-  checkIngredient
+  checkIngredient,
+  generateImage
 };

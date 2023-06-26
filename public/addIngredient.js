@@ -66,19 +66,20 @@ async function handleAutoFill(name) {
     document.getElementById('pluralName').dispatchEvent(new Event('input'));
     document.getElementById('units').value = content.units || '';
     document.getElementById('units').dispatchEvent(new Event('input'));
-    console.log('Success:', data, content.pluralName, content.units);
-
     document.getElementById('previewName').textContent = name;
-  document.getElementById('previewPluralName').textContent = content.pluralName || 'N/A';
-  document.getElementById('previewUnits').textContent = content.units || 'N/A';
+    document.getElementById('previewPluralName').textContent = content.pluralName || 'N/A';
+    document.getElementById('previewUnits').textContent = content.units || 'N/A';
+    document.getElementById('ingredientPreview').style.display = 'block';
 
-  document.getElementById('ingredientPreview').style.display = 'block';
+    // Call the generateImages function here
+    generateImages(name);
 
     loadingMessageElement.textContent = '';
   } catch (error) {
     console.error('Error:', error); // handle errors here
   }
 }
+
 
 
 function handleSubmit(event) {
@@ -167,6 +168,7 @@ form.addEventListener('submit', async function(event) {
   
   const nameFieldValue = nameField.value;
   const isIngredient = await checkIngredient(nameFieldValue);
+  
 
   if (isIngredient) {
     if (autoFillSwitch.checked) {
@@ -177,9 +179,68 @@ form.addEventListener('submit', async function(event) {
   }
 });
 
-// Initialize the button label
+function displayImages(imageUrls) {
+  const imageContainer = document.getElementById('imageContainer');
+
+  imageContainer.innerHTML = '';
+
+  imageUrls.forEach((url) => {
+    const img = document.createElement('img');
+    img.src = url;
+    img.alt = 'Generated image';
+    img.style.width = '256px';
+    img.style.height = '256px';
+    imageContainer.appendChild(img);
+  });
+}
+
 changeButtonLabel(autoFillSwitch.checked);
 
 autoFillSwitch.checked = true;
 
 autoFillSwitch.dispatchEvent(new Event('change'));
+
+const generateImagesButton = document.getElementById('generateImagesButton');
+
+async function generateImages(name) {
+  console.log('Image Generation Request:', name); 
+
+  try {
+    const imgResponse = await fetch('/api/gpt/image', { 
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name }) 
+    });
+
+    const imgData = await imgResponse.json();
+    console.log('Image Generation Response:', imgData);
+
+    displayImages(imgData.imageUrls);
+  } catch (error) {
+    console.error('Error:', error); 
+  }
+}
+
+generateImagesButton.addEventListener('click', function() {
+  const name = nameField.value; 
+  generateImages(name); 
+});
+
+function displayImages(imageUrls) {
+  const imageContainer = document.getElementById('imageContainer');
+
+  imageContainer.innerHTML = '';
+
+  imageUrls.forEach((url) => {
+    const img = document.createElement('img');
+    img.src = url;
+    img.alt = 'Generated image';
+    img.style.width = '256px';
+    img.style.height = '256px';
+    imageContainer.appendChild(img);
+  });
+}
+
+//TODO ameliorer la choix des unités
