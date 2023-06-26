@@ -16,7 +16,7 @@ const ingredientPrompt = `({
   },
 });
 
-Pour les unités, choisi parmi les suivants:
+Pour les unités, choisi jusqu'a 5 les plus pertinents parmi les suivants:
 Gramme (g), Kilogramme (kg), Milligramme (mg), Litre (l), Millilitre (ml), Cuillère à café (c. à café),
 Cuillère à soupe (c. à soupe), Tasse, Demi-tasse, Verre, Bol, Poignée, Pincée, Noix, Morceau, Tranche,
 Cube, Bouteille, Canette, Boîte, Paquet, Pièce, Feuille, Branche, Epi, Gousse, Graine, Boule, Bâton,
