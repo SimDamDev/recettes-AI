@@ -15,4 +15,19 @@ async function createChatCompletion(prompt) {
   return completion.data.choices[0].message; // retourner le message au lieu de le loguer
 }
 
-module.exports = createChatCompletion;
+async function createImage(prompt) {
+  const imageResponse = await openai.createImage({
+    prompt: prompt,
+    n: 4,
+    size: "1024x1024",
+  });
+
+  // Collect all image URLs
+  const imageUrls = imageResponse.data.data.map(image => image.url);
+  
+  return imageUrls; // return the array of image URLs
+}
+
+
+module.exports = { createChatCompletion, createImage };
+
