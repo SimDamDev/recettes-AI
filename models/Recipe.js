@@ -1,41 +1,42 @@
 const mongoose = require('mongoose');
 
+const instructionSchema = new mongoose.Schema({
+  action: String,
+  ingredients: [String],
+  utensils: [String],
+  text: String,
+});
+
 const recipeSchema = new mongoose.Schema({
-  title: String,
-  recipeImage: String, 
-  preparationTime: Number,
-  cookingTime: Number,
+  title: {
+    type: String,
+    required: true,
+  },
+  recipeImage: {
+    type: String,
+    default: './public/images/recipe_default.jpg', 
+  },
+  preparationTime: {
+    type: Number,
+    min: 0,
+  },
+  cookingTime: {
+    type: Number,
+    min: 0, 
+  },
   difficulty: String, 
   price: String, 
-  serves: Number,
+  serves: {
+    type: Number,
+    min: 1, 
+  },
   ingredients: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Ingredient'
   }],
-  preparationInstructions: [
-    {
-      action: String,
-      ingredients: [String],
-      utensils: [String],
-      text: String,
-    },
-  ],
-  cookingInstructions: [
-    {
-      action: String,
-      ingredients: [String],
-      utensils: [String],
-      text: String,
-    },
-  ],
-  servingInstructions: [
-    {
-      action: String,
-      ingredients: [String],
-      utensils: [String],
-      text: String,
-    },
-  ],
+  preparationInstructions: [instructionSchema],
+  cookingInstructions: [instructionSchema],
+  servingInstructions: [instructionSchema],
 });
 
 const Recipe = mongoose.model('Recipe', recipeSchema);
